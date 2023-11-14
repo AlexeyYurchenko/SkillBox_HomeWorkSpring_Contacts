@@ -9,4 +9,3 @@ public interface DatasourceConfig {
     public void list();
     public void saveDB();
 }
-

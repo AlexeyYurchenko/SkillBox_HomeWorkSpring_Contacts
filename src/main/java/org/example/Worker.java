@@ -16,49 +16,49 @@ public class Worker {
         this.datasourceConfig = datasourceConfig;
     }
 
-
     public void doWork() throws IOException {
         String input;
-        System.out.println("Выбор команды: " +
-                "(save) Сохранить контакт, " +
-                "(delete) удалить контакт по email, " +
-                "(list) список контактов, " +
-                "(exit) выход");
+        String selectCommand = "Select command: " +
+                "(save) Save contact, " +
+                "(delete) delete contact by email, " +
+                "(list) contact list, " +
+                "(exit) exit";
+        System.out.println(selectCommand);
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         input = bf.readLine();
         while (!input.equals("exit")) {
             switch (input) {
                 case "save" -> {
-                    System.out.println("Введите Ф.И.О: ");
+                    System.out.println("enter your full name: ");
                     String fullName = bf.readLine().trim();
-                    if (!PersonValidator.isName(fullName)){
-                        System.out.println("Неверный формат ввода ФИО");
+                    if (!PersonValidator.isName(fullName)) {
+                        System.out.println("Invalid full name input format");
                         continue;
                     }
-                    System.out.println("Введите телефон: ");
+                    System.out.println("enter your telephone number: ");
                     String phoneNumber = bf.readLine().trim();
-                    if (!PersonValidator.isNumber(phoneNumber)){
-                        System.out.println("Неверный формат ввода телефона");
+                    if (!PersonValidator.isNumber(phoneNumber)) {
+                        System.out.println("Invalid telephone number entry format");
                         continue;
                     }
-                    System.out.println("Введите email: ");
+                    System.out.println("enter your email: ");
                     String email = bf.readLine().trim();
-                    if (!PersonValidator.isEmail(email)){
-                        System.out.println("Неверный формат ввода email");
+                    if (!PersonValidator.isEmail(email)) {
+                        System.out.println("Invalid email input format");
                         continue;
                     }
                     datasourceConfig.save(new Person(fullName, phoneNumber, email));
 
                 }
                 case "delete" -> {
-                    System.out.println("Введите email контакта который нужно удалить: ");
+                    System.out.println("Enter the email of the contact you want to delete: ");
                     String email = bf.readLine().trim();
                     datasourceConfig.delete(email);
                 }
                 case "list" -> datasourceConfig.list();
             }
-            System.out.println("Выбор команды: (save) Сохранить контакт, (delete) удалить контакт по email, (list) список контактов, (exit) выход");
+            System.out.println(selectCommand);
             input = bf.readLine();
         }
         bf.close();

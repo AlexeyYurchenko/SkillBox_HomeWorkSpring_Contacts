@@ -3,6 +3,8 @@ package org.example;
 import org.example.model.Person;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +16,14 @@ public class ProdDatasource implements DatasourceConfig {
 
     private final File file = new File("src/main/resources/default-contacts.txt");
 
-
     @Value("${app.env}")
+    private String evnProfiles;
+
+    @PostConstruct
     @Override
     public void setup() {
-        System.out.println("=> Hi I'm production <=");
+        evnProfiles = "=> Hi I'm production <=";
+        System.out.println(evnProfiles);
         people = new ArrayList<>();
         Scanner input = null;
         try {
@@ -34,7 +39,7 @@ public class ProdDatasource implements DatasourceConfig {
             people.add(new Person(fullName, phoneNumber, email));
         }
     }
-
+    @PreDestroy
     public void saveDB() {
         System.out.println("Saving new contacts....");
         try {

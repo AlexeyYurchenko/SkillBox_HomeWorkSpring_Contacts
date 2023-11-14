@@ -3,6 +3,7 @@ package org.example;
 import org.example.model.Person;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +13,13 @@ public class DevDatasource implements DatasourceConfig{
     private List<Person> people;
 
     @Value("${app.env}")
+    private String evnProfiles;
+
+    @PostConstruct
     @Override
     public void setup() {
-        System.out.println("=> Hi I'm developer <=");
+        evnProfiles = "=> Hi I'm developer <=";
+        System.out.println(evnProfiles);
         people= new ArrayList<>();
         people.add(new Person("Иванов Иван Иванович","+79138205145","Test@mail.ru"));
     }
@@ -38,6 +43,4 @@ public class DevDatasource implements DatasourceConfig{
     public void saveDB() {
 
     }
-
 }
-

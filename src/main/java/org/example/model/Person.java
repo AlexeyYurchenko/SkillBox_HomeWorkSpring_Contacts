@@ -41,5 +41,3 @@ public class Person {
         return fullName + ";" + phoneNumber + ";" + email;
     }
 }
-
-

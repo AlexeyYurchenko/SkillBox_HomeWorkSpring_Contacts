@@ -23,4 +23,3 @@ public class PersonValidator {
         return emailPattern.matcher(input).matches();
     }
 }
-

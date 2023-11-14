@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 public class ProdConfig {
 
     @Bean
-    public DatasourceConfig datasourceConfig(){
+    public DatasourceConfig datasourceConfig() {
         return new ProdDatasource();
     }
 }
